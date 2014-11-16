@@ -1,28 +1,40 @@
 
 public class TrinaryTree 
 {
-
+	///The number of nodes in the tree.
 	public int size;
+	
+	///Root of the tree
 	public Node rootNode;
 	
+	///
+	///Construct an empty Trinary Tree
+	///
 	public TrinaryTree()
 	{
 		size = 0;
 		rootNode = null;
 	}
 	
+	///
+	///Add a Node with a key and value to the tree
+	///
 	public void insert(int key, Object value)
 	{
-		this.rootNode = insert(this.rootNode, key, value, this.rootNode);
+		this.rootNode = insert(this.rootNode, key, value);
 		size++;
 	}
 	
-	private Node insert(Node node, int key, Object value, Node parentNode)
+	///
+	///Inserts a node with key and value based off how the key
+	///compares to the key of the current node.
+	///left is key is less, right if key is greater, middle if key is same
+	///
+	private Node insert(Node node, int key, Object value)
 	{
 		if(node == null)
 		{
 			Node n = new Node(key, value);
-			n.parent = parentNode;
 			return n;
 		}
 		else
@@ -31,108 +43,86 @@ public class TrinaryTree
 			
 			if(compare > 0)
 			{
-				node.rightChild = insert(node.rightChild, key, value, node);
+				node.rightChild = insert(node.rightChild, key, value);
 			}
 			else if(compare < 0)
 			{
-				node.leftChild = insert(node.leftChild, key, value, node);
+				node.leftChild = insert(node.leftChild, key, value);
 			}
 			else if(compare == 0)
 			{
-				node.middleChild = insert(node.middleChild, key, value, node);
+				node.middleChild = insert(node.middleChild, key, value);
 			}
 		}
 		
 		return node;
 	}
-
-	public void delete(int key)
-	{
-		this.rootNode = delete(key, this.rootNode);	
-	}
 	
-	private Node delete(int key, Node node)
-	{
-		Node parent = node.parent;
-		int compare = Integer.compare(key, node.key);
-		
-		if(compare > 0)
-		{
-			node.rightChild = delete(key, node.rightChild);
-		}
-		else if(compare < 0)
-		{
-			node.leftChild = delete(key, node.leftChild);
-		}
-		else if(compare == 0)
-		{
-			if(node.leftChild == null && node.rightChild == null && node.middleChild == null)
-			{
-				node = null;
-			}
-		}
-		return parent;
-	}
-	
+	///
+	///Print the keys in the tree
+	///
 	public String print()
 	{
-		return Print(this.rootNode);
+		return print(this.rootNode);
 	}
 	
-	private String Print(Node root)   
+	///
+	///Prints the left child, middle child then right child of the node.
+	///
+	private String print(Node node)   
     {  
 		String printOut = "";
-        if (root != null)   
+        if (node != null)   
         {  
-            printOut += (root.key + " ");  
-            printOut += Print(root.leftChild);  
-            printOut += Print(root.middleChild);              
-            printOut += Print(root.rightChild);  
+            printOut += (node.key + " ");  
+            printOut += print(node.leftChild);  
+            printOut += print(node.middleChild);              
+            printOut += print(node.rightChild);  
         }  
         return printOut;
     }  
 	
-	
-	
-	
-	public void remove(int key)
+	///
+	///Delete a node with given key from the tree
+	///
+	public void delete(int key)
 	{
-		this.rootNode = remove(key, this.rootNode);
+		this.rootNode = delete(key, this.rootNode);
 	}
-
-	///NEED TO FIX THIS
-	///IF ROOT HAS A MIDDLE CHILD AND WE REMOVE THE KEY
-	///THEN THE SMALLEST NODE ON THE RIGHT BECOMES THE ROOT AND THE MIDDLE
-	///CHILD IS STILL THE ROOT'S MIDDLE CHILD WHICH IS WRONG.
 	
-    private Node remove(int key, Node node)
+	///
+	///Find the node with the key that we are trying to delete.
+	///If it has two children then replace its value with the min node of the
+	///right child and delete the min node.
+	///If one child then replace node to be deleted with child key and value.
+	///If no children then delete node.
+    private Node delete(int key, Node node)
     {
     	int compare = Integer.compare(key, node.key);
     	
-        if(compare > 0)
+        if(compare > 0) //Node we are deleting is to the right
         {
-        	node.rightChild = remove(key, node.rightChild);
+        	node.rightChild = delete(key, node.rightChild);
         }
-        else if(compare < 0)
+        else if(compare < 0) //Node we are deleting is to the left.
         {
-        	node.leftChild = remove(key, node.leftChild);
+        	node.leftChild = delete(key, node.leftChild);
         }   
-        else if(node.middleChild != null) //if key we are looking for has a middle child then remove it.
+        else if(node.middleChild != null) //if key we are looking for has a middle child then remove middle child.
         {
-        	node.middleChild = remove(key, node.middleChild);
+        	node.middleChild = delete(key, node.middleChild);
         }
         
-        else if(node.leftChild != null && node.rightChild != null) // Two children
+        else if(node.leftChild != null && node.rightChild != null) // Node has two children
         {
             node.key = findMin(node.rightChild).key;
             node.rightChild = removeMin(node.rightChild);
         }
-        else if(node.leftChild == null && node.rightChild == null && node.middleChild == null) //no children
+        else if(node.leftChild == null && node.rightChild == null && node.middleChild == null) //Node has no children
         {
         	node = null;
         }
-        
-        else	// one child
+        else	// Node has one child
         {
         	node = (node.leftChild != null) ? node.leftChild : node.rightChild;
         }
@@ -140,6 +130,9 @@ public class TrinaryTree
         return node;
     }
     
+    ///
+    ///Removes the smallest child node from the given node.
+    ///
     private Node removeMin(Node node)
     {
         if(node.leftChild != null)
@@ -157,13 +150,11 @@ public class TrinaryTree
         	return node.rightChild;
         }
     }
-    	
     
-	public int min()
-	{
-		return findMin(this.rootNode).key;
-	}
-	
+    ///
+    ///Returns the smallest child of a given node. 
+    ///If the smallest child has a middle child, return the middle child.
+    ///
 	private Node findMin(Node node)
 	{
 		while(node.leftChild != null)
@@ -175,14 +166,17 @@ public class TrinaryTree
 			node = node.middleChild;
 		}
 		return node;
-		
 	}
 	
+	///Return a string with the key and value of a node with given key.
 	public String find(int key)
 	{
 		return find(key, this.rootNode).toString();
 	}
 	
+	///
+	///Use binary search to find a node, given its key.
+	///
 	private Node find(int key, Node node)
 	{
 		int compare = Integer.compare(key, node.key);
@@ -210,7 +204,7 @@ public class TrinaryTree
 		return node;
 	}
 	
-	public class Node 
+	private class Node 
 	{
 
 		int key;
@@ -218,8 +212,11 @@ public class TrinaryTree
 		Node leftChild;
 		Node rightChild;
 		Node middleChild;
-		Node parent;
 		
+		///
+		///Construct a Node with key, value, 
+		///left child, middle child and right child.
+		///
 		Node(int key, Object value) 
 		{
 			this.key = key;

@@ -35,7 +35,7 @@ public class TrinaryTreeTest {
 	}
 	
 	@Test
-	public void InsertNodesTest()
+	public void insertNodesTest()
 	{
 		String nodeOne = tree.find(1);
 		assertEquals("Key: 1\nValue: 1", nodeOne);
@@ -45,77 +45,75 @@ public class TrinaryTreeTest {
 	}
 	
 	@Test
-	public void RemoveRootNodeTest()
+	public void removeRootNodeTest()
 	{
-		tree.remove(1);
+		tree.delete(1);
 		assertEquals("2 3 ", tree.print());
 		System.out.println(tree.print());
 	}
 	
 	@Test
-	public void RemoveNodeWithNoChildren()
+	public void removeNodeWithNoChildren()
 	{
-		tree.remove(3);
+		tree.delete(3);
 		assertEquals("1 2 ", tree.print());
 	}
 	
 	@Test
-	public void RemoveNodeWithRightChild()
+	public void removeNodeWithRightChild()
 	{
-		tree.remove(2);
+		tree.delete(2);
 		assertEquals("1 3 ", tree.print());
 	}
 	
 	@Test
-	public void RemoveNodeWithMiddleChild()
+	public void removeNodeWithMiddleChild()
 	{
 		tree.insert(1, 2);
-		tree.remove(1);
+		tree.delete(1);
 		assertEquals("1 2 3 ", tree.print());
 	}
 	
 	@Test
-	public void RemoveRootNodeWithTwoChildren()
+	public void removeRootNodeWithTwoChildren()
 	{
 		tree.insert(0, 0);
-		tree.remove(1);
+		tree.delete(1);
 		assertEquals("2 0 3 ", tree.print());
-		assertEquals(2, tree.rootNode.key);
 	}
 	
 	@Test
-	public void RemoveRootNodeWithTwoChildrenTest()
+	public void removeRootNodeWithTwoChildrenTest()
 	{
-		bigTree.remove(7);
-		assertEquals(8, bigTree.rootNode.key);
-		System.out.println(bigTree.print());
+		bigTree.delete(7);
+		assertEquals("8 4 1 0 1 2 3 10 9 8 13 11 14 ", bigTree.print());
 	}
 	
 	@Test
-	public void RemoveMiddleChildTest()
+	public void removeMiddleChildTest()
 	{
-		bigTree.remove(8);
+		bigTree.delete(8);
 		assertEquals("7 4 1 0 1 2 3 10 9 8 13 11 14 ", bigTree.print());
 	}
 	
 	@Test
-	public void RemoveNodeWithTwoChildrenBigTreeTest()
+	public void removeNodeWithTwoChildrenBigTreeTest()
 	{
-		bigTree.remove(10);
+		bigTree.delete(10);
 		assertEquals("7 4 1 0 1 2 3 11 9 8 8 13 14 ", bigTree.print());
 	}
 	
 	@Test
-	public void RemoveNodeWithLeftChildTest()
+	public void removeNodeWithLeftChildTest()
 	{
-		bigTree.remove(9);
+		bigTree.delete(9);
 		assertEquals("7 4 1 0 1 2 3 10 8 8 13 11 14 ", bigTree.print());
 	}
 	
 	@Test
-	public void RemoveRootThenInsertNodeTest()
+	public void removeRootThenInsertNodeTest()
 	{
-		bigTree.remove(7);
+		bigTree.delete(7);
 		bigTree.insert(7, 7);
 		assertEquals("8 4 1 0 1 2 3 7 10 9 8 13 11 14 ", bigTree.print());
 	}

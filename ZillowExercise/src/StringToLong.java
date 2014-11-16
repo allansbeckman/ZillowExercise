@@ -1,11 +1,10 @@
 
 public class StringToLong 
 {
-	
-	//Range of long -9223372036854775808 to 9223372036854775807
-	//				 1000000000000000000
-	
 
+	///
+	///Converts a given string to a long.
+	///
 	public static long StringToLong(String s)
 	{
 		long sum = 0;
@@ -25,6 +24,9 @@ public class StringToLong
 		return sum;
 	}
 	
+	///
+	///Removes characters that are not numbers from a string.
+	///
 	public static String RemoveNonNumbers(String s)
 	{
 		String formatted = "";
@@ -39,6 +41,9 @@ public class StringToLong
 		return formatted;
 	}
 	
+	///
+	///Returns int value of a character.
+	///
 	public static int CharToInteger(char c)
 	{
 		return c - 48;

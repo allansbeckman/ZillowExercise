@@ -6,7 +6,7 @@ import org.junit.Test;
 public class StringToLongTest 
 {
 	@Test
-	public void StringWithCommasToLongTest() 
+	public void stringWithCommasToLongTest() 
 	{
 		String s = "123,456,789";
 		long expectedLong = 123456789;
@@ -15,7 +15,7 @@ public class StringToLongTest
 	}
 	
 	@Test
-	public void StringWithCharactersToLongTest()
+	public void stringWithCharactersToLongTest()
 	{
 		String s = "12,..asdf2343";
 		long expectedLong = 122343;
@@ -24,7 +24,7 @@ public class StringToLongTest
 	}
 	
 	@Test
-	public void StringToLongNegativeNumberTest()
+	public void stringToLongNegativeNumberTest()
 	{
 		String s = "-123456789";
 		long expectedLong = -123456789;
@@ -33,7 +33,7 @@ public class StringToLongTest
 	}
 	
 	@Test
-	public void StringToLongMaxValueTest()
+	public void stringToLongMaxValueTest()
 	{
 		String s = "9223372036854775807";
 		long expectedLong = Long.MAX_VALUE;
@@ -43,7 +43,7 @@ public class StringToLongTest
 	}
 	
 	@Test
-	public void StringToLongMinValueTest()
+	public void stringToLongMinValueTest()
 	{
 		String s = "-9223372036854775808";
 		long expectedLong = Long.MIN_VALUE;
@@ -52,7 +52,7 @@ public class StringToLongTest
 	}
 	
 	@Test
-	public void StringToLongOverflowTest()
+	public void stringToLongOverflowTest()
 	{
 		String s = "999999999999999999999";
 		long stringToLongValue = StringToLong.StringToLong(s);
@@ -62,7 +62,7 @@ public class StringToLongTest
 	}
 	
 	@Test
-	public void StringToLongLargeNegativeNumberWithCommasTest()
+	public void stringToLongLargeNegativeNumberWithCommasTest()
 	{
 		String s = "-123,456,78,89,";
 		long expectedLong = -1234567889;

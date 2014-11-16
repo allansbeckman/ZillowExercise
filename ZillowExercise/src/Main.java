@@ -20,12 +20,8 @@ public class Main
 		t.insert(1, 7);
 		t.insert(7, 3);
 		
-		/*
-		t.delete(1);
-		t.find(1);
-		*/
 		System.out.println(t.print());
-		t.remove(5);
+		t.delete(5);
 		System.out.println("Removed 5");
 		System.out.println(t.print());
 	}
