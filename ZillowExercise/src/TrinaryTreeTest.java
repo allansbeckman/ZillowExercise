@@ -12,11 +12,13 @@ public class TrinaryTreeTest {
 	@Before
 	public void initialize()
 	{
+		/// A trinary tree with keys 1,2 3.
 		tree = new TrinaryTree();
 		tree.insert(1, 1);
 		tree.insert(2, 2);
 		tree.insert(3, 3);
 		
+		/// A trinary tree with keys 7,4,10,1,2,9,13,8,8,11,14,0,1,3
 		bigTree = new TrinaryTree();
 		bigTree.insert(7, 7);
 		bigTree.insert(4, 4);
@@ -83,6 +85,19 @@ public class TrinaryTreeTest {
 	}
 	
 	@Test
+	public void initialTreeCreationTest()
+	{
+		assertEquals("7 4 1 0 1 2 3 10 9 8 8 13 11 14 ", bigTree.print());
+	}
+	
+	@Test
+	public void insertMiddleChildTest()
+	{
+		bigTree.insert(2, 2);
+		assertEquals("7 4 1 0 1 2 2 3 10 9 8 8 13 11 14 ", bigTree.print());
+	}
+	
+	@Test
 	public void removeRootNodeWithTwoChildrenTest()
 	{
 		bigTree.delete(7);
@@ -116,5 +131,15 @@ public class TrinaryTreeTest {
 		bigTree.delete(7);
 		bigTree.insert(7, 7);
 		assertEquals("8 4 1 0 1 2 3 7 10 9 8 13 11 14 ", bigTree.print());
+	}
+	
+	@Test
+	public void insertNodesUsingArraysOfKeysAndValues()
+	{
+		TrinaryTree t = new TrinaryTree();
+		int[] keys = {1,2,3,4,5};
+		int[] values = {5,4,3,2,1};
+		t.insertMultiple(keys, values);
+		assertEquals("1 2 3 4 5 ", t.print());
 	}
 }

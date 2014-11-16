@@ -26,6 +26,21 @@ public class TrinaryTree
 	}
 	
 	///
+	///Insert multiple nodes with corresponding keys and values.
+	///
+	public void insertMultiple(int[] keys, int[] values)
+	{
+		int length = keys.length;
+		if(length == values.length)
+		{
+			for(int i = 0; i < length; i++)
+			{
+				insert(keys[i], values[i]);
+			}
+		}
+	}
+	
+	///
 	///Inserts a node with key and value based off how the key
 	///compares to the key of the current node.
 	///left is key is less, right if key is greater, middle if key is same

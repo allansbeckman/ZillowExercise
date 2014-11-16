@@ -4,9 +4,8 @@ public class Main
 	public static void main(String args[])
 	{
 		String st = "-9223372036854775807";
-		long toLong = StringToLong.StringToLong(st);
+		long toLong = StringToLong.stringToLong(st);
 		System.out.println(toLong);
-		System.out.println(toLong/9);
 		
 		TrinaryTree t = new TrinaryTree();
 		t.insert(5, 1);

@@ -5,7 +5,7 @@ public class StringToLong
 	///
 	///Converts a given string to a long.
 	///
-	public static long StringToLong(String s)
+	public static long stringToLong(String s)
 	{
 		long sum = 0;
 		
